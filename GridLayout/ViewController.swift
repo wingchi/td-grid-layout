@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    private let gridViewModel = GridViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,13 +22,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.register(GridCollectionViewCell.self, forCellWithReuseIdentifier: GridCollectionViewCell.nibName)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GridCollectionViewCell.nibName, for: indexPath)
+            as? GridCollectionViewCell
+            else { fatalError("Could not find GridCollectionViewCell") }
+        let labelString = "\(gridViewModel.data[indexPath.row])"
+        cell.configure(with: labelString)
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return gridViewModel.data.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 100, height: 100)
     }
 }
