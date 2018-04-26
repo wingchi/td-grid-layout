@@ -86,4 +86,22 @@ class GridViewModelTests: XCTestCase {
             XCTAssertEqual(cellSize, expectedCellSizes[row])
         }
     }
+    
+    func testSixItemCellSize() {
+        let expectedCellSizes = [
+            CGSize(width: expectedFullWidth, height: expectedHeight),
+            CGSize(width: expectedFullWidth, height: expectedHeight),
+            CGSize(width: expectedHalfWidth, height: expectedHeight),
+            CGSize(width: expectedHalfWidth, height: expectedHeight),
+            CGSize(width: expectedHalfWidth, height: expectedHeight),
+            CGSize(width: expectedHalfWidth, height: expectedHeight)
+        ]
+        let viewModel = GridViewModel()
+        viewModel.data = [1, 2, 3, 4, 5, 6]
+        for row in 0...(viewModel.data.count - 1) {
+            let testIndexPath = IndexPath(row: row, section: 0)
+            let cellSize = viewModel.cellSize(for: testFrame, at: testIndexPath)
+            XCTAssertEqual(cellSize, expectedCellSizes[row])
+        }
+    }
 }
