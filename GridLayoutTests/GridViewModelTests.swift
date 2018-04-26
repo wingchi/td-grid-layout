@@ -11,8 +11,8 @@ import XCTest
 
 class GridViewModelTests: XCTestCase {
     let testFrame = CGRect(x: 0, y: 0, width: 72, height: 130)
-    let expectedFullWidth = 72 - 2 * GridViewModel.itemMargin // 56
-    let expectedHalfWidth = (72 / 2) - 2 * GridViewModel.itemMargin //20
+    let expectedFullWidth: CGFloat = 72 // 72
+    let expectedHalfWidth = (72 / 2) - (GridViewModel.itemMargin / 2) //32
     let expectedHeight = (130 / 5) - 2 * GridViewModel.itemMargin //10
     
     func testOneItemCellSize() {

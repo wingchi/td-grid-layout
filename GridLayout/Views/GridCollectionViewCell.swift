@@ -31,7 +31,6 @@ class GridCollectionViewCell: UICollectionViewCell {
         Bundle.main.loadNibNamed(GridCollectionViewCell.nibName, owner: self, options: nil)
         addSubview(view)
         view.frame = bounds
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
     func configure(with labelString: String) {
